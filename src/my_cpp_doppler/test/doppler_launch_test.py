@@ -24,7 +24,7 @@ def generate_test_description():
         # Launch a process to test
         launch.actions.ExecuteProcess(
             cmd=['echo', 'hello_world'],
-            shell=False
+            shell=True
         ),
         launch_testing.actions.ReadyToTest(),
     ])
