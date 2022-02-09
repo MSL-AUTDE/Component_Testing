@@ -8,13 +8,3 @@ install/
 build/
 log/
 recordings/
-21_Simulation_MWL/211_Gazebo/RGB_Simulation_WS/src/simulation_gazebo/models/
-50_Software-EdgeDomain_THR/00_simulation/gazebo_sim/gazebo_ros2_sim/models/
-.ipynb_checkpoints/
-
-# Camera Anonymization
-41_DeepLearning_THR/00_camera_anonymization/00_license_plate_detection/benchmarks/
-41_DeepLearning_THR/00_camera_anonymization/00_license_plate_detection/workspace/data/
-41_DeepLearning_THR/00_camera_anonymization/00_license_plate_detection/workspace/nn_training/
-41_DeepLearning_THR/00_camera_anonymization/01_face_detection/workspace/data/
-41_DeepLearning_THR/00_camera_anonymization/01_face_detection/workspace/nn_training/
