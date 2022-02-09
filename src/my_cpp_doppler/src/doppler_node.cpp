@@ -4,41 +4,47 @@
 #include <string>
 
 #include "rclcpp/rclcpp.hpp"
-#include "std_msgs/msg/string.hpp"
+#include "std_msgs/msg/int32.hpp"
 
 using namespace std::chrono_literals;
+using std::placeholders::_1;
 
 /* This example creates a subclass of Node and uses std::bind() to register a
 * member function as a callback from the timer. */
 
-class MinimalPublisher : public rclcpp::Node
+class DopplerNode : public rclcpp::Node
 {
   public:
-    MinimalPublisher()
-    : Node("minimal_publisher"), count_(0)
+    DopplerNode()
+    : Node("doppler_node")
     {
-      publisher_ = this->create_publisher<std_msgs::msg::String>("topic", 10);
-      timer_ = this->create_wall_timer(
-      500ms, std::bind(&MinimalPublisher::timer_callback, this));
+      subscription_ = this->create_subscription<std_msgs::msg::Int32>(
+      "integer", 10, std::bind(&DopplerNode::verdopple_integer, this, _1));
+
+      publisher_ = this->create_publisher<std_msgs::msg::Int32>("doppelte_integer", 10);
     }
 
   private:
-    void timer_callback()
+
+    void verdopple_integer(const std_msgs::msg::Int32::SharedPtr msg) const
     {
-      auto message = std_msgs::msg::String();
-      message.data = "Hello, world! " + std::to_string(count_++);
-      RCLCPP_INFO(this->get_logger(), "Publishing: '%s'", message.data.c_str());
+      RCLCPP_INFO(this->get_logger(), "I heard: %i", msg->data);
+
+      auto message = std_msgs::msg::Int32();
+      message.data = msg->data *2;
+
+      RCLCPP_INFO(this->get_logger(), "Publishing: %i", message.data);
       publisher_->publish(message);
     }
-    rclcpp::TimerBase::SharedPtr timer_;
-    rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
-    size_t count_;
+
+    rclcpp::Publisher<std_msgs::msg::Int32>::SharedPtr publisher_;
+    rclcpp::Subscription<std_msgs::msg::Int32>::SharedPtr subscription_;
 };
 
 int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared<MinimalPublisher>());
+  rclcpp::spin(std::make_shared<DopplerNode>());
   rclcpp::shutdown();
   return 0;
 }
