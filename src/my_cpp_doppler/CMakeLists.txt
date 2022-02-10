@@ -17,10 +17,15 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(ament_cmake_python REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclpy REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(launch_testing_ament_cmake)
 add_launch_test(test/doppler_launch_test.py)
+
+# Include Cpp "include" directory
+include_directories(include)
 
 add_executable(doppler src/doppler_node.cpp)
 ament_target_dependencies(doppler rclcpp std_msgs)
@@ -28,5 +33,14 @@ ament_target_dependencies(doppler rclcpp std_msgs)
 install(TARGETS
   doppler
   DESTINATION lib/${PROJECT_NAME})
+
+# Install Python modules
+ament_python_install_package(${PROJECT_NAME})
+
+# Install Python executables
+#install(PROGRAMS
+#  scripts/py_node.py
+#  DESTINATION lib/${PROJECT_NAME}
+#)
 
 ament_package()
