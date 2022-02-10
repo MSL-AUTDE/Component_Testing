@@ -15,12 +15,12 @@ import pytest
 @launch_testing.markers.keep_alive
 def generate_test_description():
     return launch.LaunchDescription([
-        #Node(
+        # Node(
         #    package='my_cpp_doppler',
         #    namespace='doppler',
         #    executable='doppler',
         #    name='doppler'
-        #),
+        # ),
         # Launch a process to test
         launch.actions.ExecuteProcess(
             cmd=['echo', 'hello_world'],

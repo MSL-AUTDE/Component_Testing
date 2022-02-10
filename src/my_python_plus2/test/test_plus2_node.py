@@ -13,15 +13,15 @@ from launch_ros.descriptions import ParameterValue
 
 import pytest
 import yaml
-        
+
+
 def test_plus2():
     plus2_node = Node(
-        package = 'my_python_plus2',
-        name = 'plus2_node',
-        executable = 'plus2',
+        package='my_python_plus2',
+        name='plus2_node',
+        executable='plus2',
         output='screen',
     )
-
 
     ld = LaunchDescription()
     ld.add_action(plus2_node)
@@ -30,6 +30,7 @@ def test_plus2():
     ls.include_launch_description(ld)
     ret = ls.run()
     assert 0 == ret
-        
-if __name__ == '__main__':     
+
+
+if __name__ == '__main__':
     test_plus2()

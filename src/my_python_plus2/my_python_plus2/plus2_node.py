@@ -22,17 +22,21 @@ class Plus2Node(Node):
 
     def __init__(self):
         super().__init__('plus_2_node')
-        self.publisher_ = self.create_publisher(Int32, 'Plus2', 10)
-        timer_period = 0.5  # seconds
-        self.timer = self.create_timer(timer_period, self.timer_callback)
-        self.i = 0
+        self.publisher_ = self.create_publisher(Int32, 'plus_2', 10)
 
-    def timer_callback(self):
-        msg = Int32()
-        msg.data = self.i
-        self.publisher_.publish(msg)
-        #self.get_logger().info('Publishing: "%i"' % msg.data)
-        self.i += 1
+        self.subscription = self.create_subscription(
+            Int32,
+            'doppelte_integer',
+            self.plus2_callback,
+            10)
+        self.subscription
+
+    def plus2_callback(self,msg):
+        self.get_logger().info('Received: "%i"' % msg.data)
+        message = Int32()
+        message.data = msg.data + 2
+        self.publisher_.publish(message)
+        self.get_logger().info('Publishing: "%i"' % message.data)
 
 
 def main(args=None):
