@@ -49,5 +49,3 @@ class TestProcessOutput(unittest.TestCase):
         # Check that all processes in the launch (in this case, there's just one) exit
         # with code 0
         launch_testing.asserts.assertExitCodes(proc_info)
-        
-    
