@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+                'plus2 = my_python_plus2.plus2_node:main',
         ],
     },
 )
