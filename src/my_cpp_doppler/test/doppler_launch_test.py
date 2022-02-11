@@ -26,6 +26,14 @@ def generate_test_description():
             cmd=['echo', 'hello_world'],
             shell=True
         ),
+        launch.actions.ExecuteProcess(
+            cmd=['echo', 'Dies ist ein Test', '>>', '~/testfile.txt'],
+            shell=True
+        ),
+        launch.actions.ExecuteProcess(
+            cmd=['ros2 run my_cpp_doppler doppler'],
+            shell=True
+        ),
         launch_testing.actions.ReadyToTest(),
     ])
 
@@ -39,7 +47,7 @@ class TestHelloWorldProcess(unittest.TestCase):
         # 'proc_output' is an object added automatically by the launch_testing framework.
         # It captures the outputs of the processes launched in generate_test_description()
         # Refer to the documentation for further details.
-        proc_output.assertWaitFor('hello_world', timeout=10, stream='stdout')
+        proc_output.assertWaitFor('hello_world', timeout=30, stream='stdout')
 
 
 @launch_testing.post_shutdown_test()

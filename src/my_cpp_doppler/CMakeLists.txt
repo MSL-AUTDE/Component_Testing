@@ -40,9 +40,9 @@ install(TARGETS
 ament_python_install_package(${PROJECT_NAME})
 
 # Install Python executables
-#install(PROGRAMS
-#  scripts/py_node.py
-#  DESTINATION lib/${PROJECT_NAME}
-#)
+install(PROGRAMS
+  scripts/python_doppler_test_node.py
+  DESTINATION lib/${PROJECT_NAME}
+)
 
 ament_package()
