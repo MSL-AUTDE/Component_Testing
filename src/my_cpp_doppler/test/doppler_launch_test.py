@@ -47,7 +47,7 @@ class TestHelloWorldProcess(unittest.TestCase):
         # 'proc_output' is an object added automatically by the launch_testing framework.
         # It captures the outputs of the processes launched in generate_test_description()
         # Refer to the documentation for further details.
-        proc_output.assertWaitFor('hello_world', timeout=30, stream='stdout')
+        proc_output.assertWaitFor('helllo_world', timeout=30, stream='stdout')
 
 
 @launch_testing.post_shutdown_test()
