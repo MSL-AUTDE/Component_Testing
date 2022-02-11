@@ -17,10 +17,12 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-find_package(ament_cmake_python REQUIRED)
+find_package(ament_cmake_python REQUIRED) # Add python capabilities
 find_package(rclcpp REQUIRED)
-find_package(rclpy REQUIRED)
+find_package(rclpy REQUIRED) # Add python capabilities
 find_package(std_msgs REQUIRED)
+
+# Add launch_testing capabilities
 find_package(launch_testing_ament_cmake)
 add_launch_test(test/doppler_launch_test.py)
 
